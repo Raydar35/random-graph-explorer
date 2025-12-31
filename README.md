@@ -1,43 +1,80 @@
-DSFinalProject
-===============
+# Random Graph Explorer
 
-Team
-----
-Salvatore Gallizzi 
-Yasir Pervaiz
-Darius Beckford
+Random Graph Explorer is a Java application developed as a final project for a Data Structures course. The project explores the implementation and analysis of **directed, weighted graphs**, focusing on graph traversal, cycle detection, and cost evaluation. To generate graphs, the program uses a cryptographically-inspired pseudorandom number generator (Blum–Blum–Shub) instead of Java’s built-in RNG.
 
-(Please replace the placeholders above with your actual names before submission.)
+## Features
 
-Overview
---------
-This project implements a small command-line system that generates directed, weighted graphs using a Blum-Blum-Shub (BBS) pseudorandom generator. Features:
-- Random graph generation (nodes in [3,15], edges between numNodes and numNodes*3, weights in [1,20])
-- Printed adjacency list on the console
-- Find a path from node x to node y (DFS; first path found) and print its total cost
-- Detect a directed cycle and print the vertices forming one detected cycle
-- Before generating a new graph, the program saves the current graph and any last-found path/cycle to a timestamped text file in `saved_graphs/`
+- Generates random directed, weighted graphs
+- Uses an adjacency-list representation
+- Depth-first search (DFS) pathfinding between nodes
+- Computes total cost of a discovered path
+- Detects directed cycles using DFS and recursion stack tracking
+- Saves graphs, paths, and cycles to disk for later inspection
 
-Requirements
-------------
-- Java JDK 8 or later (installed and configured in IntelliJ IDEA)
-- IntelliJ IDEA (Community or Ultimate) recommended for running and testing
+## Technologies & Concepts
 
-Files of interest
------------------
-- src/Main.java           — interactive menu and program flow
-- src/Graph.java          — graph representation, generation, path/cycle algorithms
-- src/Edge.java           — edge model
-- src/BlumBlumShub.java   — Blum-Blum-Shub PRNG
-- src/FileManager.java    — saves graph and last path/cycle to file
-- saved_graphs/           — program creates this directory and places backups there
+**Language:** Java  
+**Data Structures:** adjacency lists, lists, maps  
+**Algorithms:** DFS, cycle detection in directed graphs  
+**Mathematical Concepts:** modular arithmetic, prime numbers, pseudorandom number generation  
+**Software Design:** object-oriented design, file I/O, separation of concerns 
 
-Interactive usage (IntelliJ IDEA)
----------------------------------
-Follow these steps to open and run in IntelliJ IDEA.
+## Project Structure
+```
+src/
+├── Main.java            # Command-line interface and program entry point
+├── Graph.java           # Graph representation and algorithms
+├── Edge.java            # Directed, weighted edge abstraction
+├── FileManager.java     # Graph persistence utilities
+└── BlumBlumShub.java    # Cryptographically-inspired RNG
+```
 
-- Open IntelliJ IDEA.
-- Create a new project.
-- Add .java files into src/ directory.
-- Run Main.java
-- Follow on-screen prompts to generate graphs, find paths, detect cycles, and save graphs. (graphs are saved automatically before generating a new one)
+## How to Run
+
+### Prerequisites
+
+- Java 11+
+
+### Steps
+
+1. Compile
+   ```
+   javac src/*.java
+   ```
+2. Run
+   ```
+   java -cp src Main
+   ```
+
+## Example Usage
+```
+1. Generate New Graph
+2. Show Graph
+3. Find a Path
+4. Detect Cycle
+5. Exit
+```
+
+### Example Output
+```
+Directed Weighted Graph: nodes=6, edges=12
+  0: -> 2(w=5), -> 4(w=9)
+  1: -> 3(w=7)
+Path: [0, 2, 5]
+Cost: 14
+Cycle: [1, 3, 4, 1]
+```
+
+## Design Notes
+
+- DFS is used for both pathfinding and cycle detection.
+- Pathfinding returns the first valid path discovered, not necessarily the shortest or minimum-cost path.
+- The random graph generator is educational, not intended for cryptographic use.
+- Graphs, paths, and cycles are persisted to text files using `FileManager`.
+
+## Future Improvements
+
+- Implement shortest-path algorithms (BFS, Dijkstra)
+- Add unit tests for graph operations
+- Visualize graphs using a GUI
+- Improve input validation and error handling
